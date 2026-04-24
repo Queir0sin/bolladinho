@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seja um Revendedor | Bolladinho - A piteira de bambu nº 1 do Brasil</title>
+    <meta name="description"
+        content="Torne-se um parceiro Bolladinho. Leve a natureza para o seu balcão, ofereça alta margem de lucro, produto sustentável e exclusivo para sua tabacaria ou loja.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .reseller-hero {
+            min-height: 70vh;
+        }
+
+        /* Numbered Benefits */
+        .numbered-benefits {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+
+        .numbered-item {
+            display: grid;
+            grid-template-columns: 80px 1fr;
+            align-items: flex-start;
+            gap: 1.5rem;
+            padding: 2rem 0;
+            border-bottom: 1px solid rgba(212, 195, 163, 0.15);
+        }
+
+        .numbered-item:last-child {
+            border-bottom: none;
+        }
+
+        .numbered-item .num {
+            font-family: var(--font-heading);
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--color-primary-light);
+            line-height: 1;
+            opacity: 0.8;
+        }
+
+        .numbered-item h3 {
+            font-size: 1.1rem;
+            color: var(--color-secondary);
+            margin-bottom: 0.4rem;
+        }
+
+        .numbered-item p {
+            color: var(--color-text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* What we offer */
+        .offer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
+            gap: 1.5rem;
+        }
+
+        .offer-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1.2rem;
+            padding: 1rem 0;
+            position: relative;
+        }
+
+        .offer-item::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, rgba(212, 195, 163, 0.2) 0%, transparent 100%);
+        }
+
+        .offer-item .check-icon {
+            width: 36px;
+            height: 36px;
+            min-width: 36px;
+            background: var(--color-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 0.8rem;
+        }
+
+        .offer-item h4 {
+            color: var(--color-secondary);
+            margin-bottom: 0.3rem;
+            font-size: 1rem;
+        }
+
+        .offer-item p {
+            color: var(--color-text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* Quote banner */
+        .quote-banner {
+            text-align: center;
+            padding: 3rem 2rem;
+            background: var(--color-primary);
+            border-radius: 16px;
+            margin-top: 3rem;
+        }
+
+        .quote-banner p {
+            font-family: var(--font-heading);
+            font-style: italic;
+            font-size: clamp(1.1rem, 2vw, 1.5rem);
+            color: #fff;
+        }
+
+        /* FAQ */
+        .faq-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: rgba(18, 31, 20, 0.6);
+            border: 1px solid rgba(212, 195, 163, 0.1);
+            border-radius: 50px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .faq-item.open {
+            border-radius: 16px;
+        }
+
+        .faq-question {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 1.8rem;
+            font-weight: 600;
+            color: var(--color-text);
+            gap: 1rem;
+        }
+
+        .faq-question i {
+            color: var(--color-primary-light);
+            transition: transform 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .faq-item.open .faq-question i {
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.3s ease;
+            color: var(--color-text-muted);
+            padding: 0 1.8rem;
+            font-size: 0.95rem;
+        }
+
+        .faq-item.open .faq-answer {
+            max-height: 100px;
+            padding: 0 1.8rem 1.2rem;
+        }
+
+        /* CTA + Form */
+        .cta-form-section {
+            background: var(--color-bg-light);
+            padding: 6rem 0;
+        }
+
+        .cta-form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+            align-items: center;
+        }
+
+        .cta-form-text h2 {
+            font-size: clamp(1.8rem, 3vw, 2.5rem);
+            color: #fff;
+            line-height: 1.3;
+            margin-bottom: 1.5rem;
+        }
+
+        .cta-form-text h2 strong {
+            color: var(--color-secondary);
+        }
+
+        .cta-form-text p {
+            color: var(--color-text-muted);
+            font-size: 1.05rem;
+        }
+
+        .contact-form {
+            background: rgba(18, 31, 20, 0.6);
+            padding: 2.5rem;
+            border-radius: 20px;
+            border: 1px solid rgba(212, 195, 163, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 1.3rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.4rem;
+            color: var(--color-secondary);
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 0.9rem 1rem;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(0, 0, 0, 0.3);
+            color: #fff;
+            font-family: var(--font-body);
+            font-size: 0.95rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--color-primary-light);
+        }
+
+        .form-group input::placeholder {
+            color: rgba(255, 255, 255, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            .cta-form-grid {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+            }
+
+            .numbered-item {
+                grid-template-columns: 60px 1fr;
+            }
+
+            .numbered-item .num {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="particles-container"></div>
+
+    <header class="navbar" id="navbar">
+        <div class="container nav-content">
+            <a href="index.html" class="logo">
+                <i class="fa-solid fa-leaf"></i> Bolladinho
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#beneficios">Benefícios</a></li>
+                <li><a href="index.html#detalhes">Detalhes</a></li>
+            </ul>
+            <div class="nav-actions">
+                <div class="social-icons">
+                    <a href="https://www.instagram.com/soubolladinho" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="index.html#comprar" aria-label="Comprar"><i class="fa-solid fa-cart-shopping"></i></a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero -->
+        <section class="hero reseller-hero" id="home">
+            <div class="parallax-bg"
+                style="background-image: url('img/hero_revendedor_nature.png'); background-position: center; height: 105%;">
+            </div>
+            <div class="hero-overlay"
+                style="background: linear-gradient(to right, rgba(9,18,9,0.92) 0%, rgba(9,18,9,0.5) 100%);"></div>
+            <div class="container hero-content">
+                <span class="badge reveal"><i class="fa-solid fa-handshake"></i> Parceria de Sucesso</span>
+                <h1 class="reveal delay-1">Se Torne um Parceiro<br>Bolladinho.</h1>
+                <p class="subtitle reveal delay-2">Leve a natureza para o seu balcão. Seja um parceiro Bolladinho e
+                    ofereça a piteira de bambu nº 1 do Brasil para os seus clientes.</p>
+                <div class="hero-buttons reveal delay-3">
+                    <a href="#cadastro" class="btn btn-primary pulse"><i class="fa-solid fa-handshake"></i> Quero ser
+                        Parceiro</a>
+                    <a href="#vantagens" class="btn btn-outline">Ver Vantagens</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- O que oferecemos -->
+        <section class="info" id="oferecemos">
+            <div class="container">
+                <div class="section-title reveal">
+                    <h2>O que Oferecemos para sua Loja?</h2>
+                    <p>Muito além do produto. Somos parceiros de verdade no crescimento do seu negócio.</p>
+                </div>
+                <div class="offer-grid reveal">
+                    <div class="offer-item">
+                        <div class="check-icon"><i class="fa-solid fa-check"></i></div>
+                        <div>
+                            <h4>Fotos Profissionais</h4>
+                            <p>Disponibilizamos um drive com fotos e vídeos exclusivos para você usar no Instagram da
+                                sua loja.</p>
+                        </div>
+                    </div>
+                    <div class="offer-item">
+                        <div class="check-icon"><i class="fa-solid fa-check"></i></div>
+                        <div>
+                            <h4>Material de PDV</h4>
+                            <p>Displays de balcão e flyers para destacar o produto e aumentar as vendas no ponto de
+                                venda.</p>
+                        </div>
+                    </div>
+                    <div class="offer-item">
+                        <div class="check-icon"><i class="fa-solid fa-check"></i></div>
+                        <div>
+                            <h4>Divulgação nas Redes</h4>
+                            <p>Marcamos sua loja em nosso Instagram <strong>@soubolladinho</strong> como ponto de venda
+                                oficial.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção Editorial: Por Que Revender -->
+        <section style="position:relative; padding: 8rem 0; overflow:hidden; background: var(--color-bg);"
+            id="vantagens">
+            <!-- Background effects -->
+            <div
+                style="position:absolute; top:-20%; right:-10%; width:60%; height:140%; background: radial-gradient(circle, rgba(52,94,67,0.12) 0%, transparent 70%); z-index:0;">
+            </div>
+
+            <div class="container" style="position:relative; z-index:1;">
+                <div class="vantagens-editorial"
+                    style="display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center;">
+
+                    <div class="textual-content reveal" style="text-align: left;">
+                        <span
+                            style="font-family: var(--font-heading); color: var(--color-secondary); font-size: 1.2rem; font-style: italic; display: block; margin-bottom: 0.5rem;">Oportunidade
+                            de Negócio</span>
+                        <h2
+                            style="font-family: var(--font-heading); font-size: clamp(2.5rem, 4vw, 3.5rem); color: #fff; line-height: 1.1; margin-bottom: 2rem;">
+                            Por Que Revender<br><span style="color: var(--color-primary-light);">Bolladinho?</span></h2>
+
+                        <p
+                            style="font-size: 1.15rem; color: var(--color-text-muted); line-height: 1.8; margin-bottom: 2.5rem;">
+                            Ao revender Bolladinho, você não está apenas adicionando um produto à vitrine. Você está
+                            oferecendo uma <strong>experiência premium e consciente</strong> que seus clientes já
+                            procuram. Nosso foco é garantir um <span style="color: var(--color-secondary);">giro
+                                rápido</span> e rentabilidade real para a sua loja.
+                        </p>
+
+                        <div style="margin-top: 2rem; display: flex; flex-direction: column; gap: 2rem;">
+                            <div style="display: flex; gap: 1.5rem; align-items: flex-start;">
+                                <div
+                                    style="font-family: var(--font-heading); font-size: 3rem; color: rgba(212, 195, 163, 0.2); font-weight: 700; line-height: 0.8; margin-top: 5px;">
+                                    01</div>
+                                <div>
+                                    <h4
+                                        style="font-size: 1.2rem; color: #fff; margin-bottom: 0.5rem; font-weight: 600;">
+                                        Sustentabilidade que Vende</h4>
+                                    <p style="color: var(--color-text-muted); font-size: 0.95rem;">Produto 100% natural,
+                                        reutilizável e com forte apelo para o público atual que busca redução de danos.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div style="display: flex; gap: 1.5rem; align-items: flex-start;">
+                                <div
+                                    style="font-family: var(--font-heading); font-size: 3rem; color: rgba(212, 195, 163, 0.2); font-weight: 700; line-height: 0.8; margin-top: 5px;">
+                                    02</div>
+                                <div>
+                                    <h4
+                                        style="font-size: 1.2rem; color: #fff; margin-bottom: 0.5rem; font-weight: 600;">
+                                        Grade Inteligente & Lucro</h4>
+                                    <p style="color: var(--color-text-muted); font-size: 0.95rem;">Curadoria de tamanhos
+                                        (P, M, G) desenhada para todos os gostos, com condições comerciais altamente
+                                        competitivas.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <blockquote
+                            style="margin-top: 3.5rem; padding-left: 1.5rem; border-left: 3px solid var(--color-primary); font-family: var(--font-heading); font-style: italic; font-size: 1.2rem; color: var(--color-secondary); line-height: 1.5;">
+                            &ldquo;Transformando o ritual de centenas de clientes, do DF para todo o Brasil.&rdquo;
+                        </blockquote>
+                    </div>
+
+                    <div class="image-content reveal delay-1" style="position: relative;">
+                        <div
+                            style="border-radius: 20px; overflow: hidden; position: relative; box-shadow: 0 20px 50px rgba(0,0,0,0.6); aspect-ratio: 4/5;">
+                            <img src="img/bolladinho revenda.PNG" alt="Bolladinho Revenda"
+                                style="width: 100%; height: 100%; display: block; object-fit: cover;">
+                            <div
+                                style="position: absolute; inset: 0; background: linear-gradient(to top, rgba(9,18,9,0.9), transparent 60%);">
+                            </div>
+
+                            <div style="position: absolute; bottom: 2rem; left: 2rem; right: 2rem;">
+                                <p
+                                    style="font-family: var(--font-heading); color: #fff; font-size: 1.5rem; font-style: italic; line-height: 1.3;">
+                                    A escolha certa para modernizar o seu balcão.</p>
+                            </div>
+                        </div>
+
+                        <!-- Floating element for innovation -->
+                        <div class="glass pulse-strong"
+                            style="position: absolute; top: 40px; right: -30px; padding: 1.2rem 1.5rem; border-radius: 16px; display: flex; align-items: center; gap: 1rem; box-shadow: 0 15px 30px rgba(0,0,0,0.4);">
+                            <div
+                                style="width: 46px; height: 46px; background: var(--color-primary); border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 1.2rem; color: #fff;">
+                                <i class="fa-solid fa-arrow-trend-up"></i>
+                            </div>
+                            <div>
+                                <div style="font-weight: 700; color: #fff; font-size: 1.1rem; line-height: 1.2;">Alta
+                                    Demanda</div>
+                                <div style="color: var(--color-secondary); font-size: 0.85rem;">Giro rápido garantido
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <style>
+                    @media (max-width: 992px) {
+                        .vantagens-editorial {
+                            grid-template-columns: 1fr !important;
+                            gap: 4rem !important;
+                        }
+
+                        .image-content .glass {
+                            right: 20px !important;
+                            top: -20px !important;
+                        }
+                    }
+                </style>
+            </div>
+        </section>
+
+        <!-- FAQ (Novo Modelo) -->
+        <section class="info" id="faq" style="background: var(--color-bg-light); border-top: 1px solid rgba(212,195,163,0.05); padding: 8rem 0;">
+            <div class="container">
+                <div class="section-title reveal" style="margin-bottom: 5rem;">
+                    <h2>Perguntas Frequentes</h2>
+                    <p>Informações diretas para você fechar negócio conosco.</p>
+                </div>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr)); gap: 4rem; text-align: left;" class="reveal">
+                    
+                    <div style="position: relative;">
+                        <i class="fa-solid fa-box-open" style="font-size: 2.5rem; color: var(--color-primary-light); margin-bottom: 1.5rem; display: block;"></i>
+                        <h4 style="font-family: var(--font-heading); font-size: 1.5rem; color: #fff; margin-bottom: 1rem;">Qual o número de pedidos mínimo?</h4>
+                        <p style="color: var(--color-text-muted); line-height: 1.6; font-size: 1.05rem;">Revendemos a partir de <strong>50 unidades por pedido</strong>. Essa quantidade foi pensada para garantir que você tenha um estoque ideal para testar a ótima saída do produto.</p>
+                    </div>
+
+                    <div style="position: relative;">
+                        <i class="fa-solid fa-truck-fast" style="font-size: 2.5rem; color: var(--color-primary-light); margin-bottom: 1.5rem; display: block;"></i>
+                        <h4 style="font-family: var(--font-heading); font-size: 1.5rem; color: #fff; margin-bottom: 1rem;">Enviamos para onde?</h4>
+                        <p style="color: var(--color-text-muted); line-height: 1.6; font-size: 1.05rem;">Enviamos para <strong>todo o Brasil</strong>. Você tem total flexibilidade para escolher a opção de envio que melhor atende a sua região, seja via Correios ou Transportadora parceira.</p>
+                    </div>
+
+                    <div style="position: relative;">
+                        <i class="fa-solid fa-credit-card" style="font-size: 2.5rem; color: var(--color-primary-light); margin-bottom: 1.5rem; display: block;"></i>
+                        <h4 style="font-family: var(--font-heading); font-size: 1.5rem; color: #fff; margin-bottom: 1rem;">Quais as formas de pagamento?</h4>
+                        <p style="color: var(--color-text-muted); line-height: 1.6; font-size: 1.05rem;">Para facilitar a sua reposição, aceitamos pagamentos via <strong>Pix (com condições especiais)</strong>, Boleto Bancário ou parcelamento no Cartão de Crédito.</p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA + Formulário -->
+        <section class="cta-form-section" id="cadastro">
+            <div class="container">
+                <div class="cta-form-grid">
+                    <div class="cta-form-text reveal">
+                        <h2>Diferencie sua vitrine e <strong>aumente seu ticket médio.</strong></h2>
+                        <p>Preencha os dados ao lado para receber nosso catálogo exclusivo de atacado e comece a
+                            revender a piteira de bambu nº 1 do DF.</p>
+                        <br>
+                        <p style="color: var(--color-secondary);"><i class="fa-solid fa-leaf"></i> &nbsp;Produto único
+                            no mercado nacional.</p>
+                        <p style="color: var(--color-secondary); margin-top: 0.5rem;"><i
+                                class="fa-solid fa-truck-fast"></i> &nbsp;Entrega para todo o Brasil.</p>
+                        <p style="color: var(--color-secondary); margin-top: 0.5rem;"><i
+                                class="fa-solid fa-headset"></i> &nbsp;Suporte comercial dedicado.</p>
+                        <br>
+                        <a href="https://wa.me/5561995636229?text=Olá!%20Tenho%20interesse%20em%20revender%20as%20piteiras%20Bolladinho."
+                            target="_blank" class="btn pulse-strong"
+                            style="background-color:#25D366; color:#fff; display:inline-flex;">
+                            <i class="fa-brands fa-whatsapp" style="font-size:1.1rem;"></i> Falar no WhatsApp Comercial
+                        </a>
+                    </div>
+                    <div class="contact-form reveal delay-1">
+                        <form action="https://formsubmit.co/bolladinhosmoking@gmail.com" method="POST">
+                            <input type="hidden" name="_captcha" value="false">
+                            <input type="hidden" name="_subject" value="Novo Contato - Revendedor Bolladinho">
+                            <div class="form-group">
+                                <label for="nome">Nome Completo *</label>
+                                <input type="text" name="nome" id="nome" required placeholder="Seu nome">
+                            </div>
+                            <div class="form-group">
+                                <label for="empresa">Nome da Empresa *</label>
+                                <input type="text" name="empresa" id="empresa" required placeholder="Nome do seu negócio">
+                            </div>
+                            <div class="form-group">
+                                <label for="endereco">Endereço *</label>
+                                <input type="text" name="endereco" id="endereco" required placeholder="Cidade / Estado">
+                            </div>
+                            <div class="form-group">
+                                <label for="telefone">Telefone *</label>
+                                <input type="tel" name="telefone" id="telefone" required placeholder="(00) 00000-0000">
+                            </div>
+                            <button type="submit" class="btn btn-primary" style="width:100%; margin-top:0.5rem; transition: all 0.3s ease;">Enviar
+                                <i class="fa-solid fa-paper-plane"></i></button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-content">
+            <div class="footer-brand">
+                <a href="index.html" class="logo"><i class="fa-solid fa-leaf"></i> Bolladinho</a>
+                <p><span class="hide-mobile">Uma maneira natural de fumar. </span>A primeira piteira de fibras naturais
+                    do mercado.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Navegação</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="index.html#beneficios">Benefícios</a></li>
+                    <li><a href="index.html#detalhes">Detalhes</a></li>
+                    <li><a href="index.html#comprar">Comprar</a></li>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h4>Contato</h4>
+                <p><i class="fa-brands fa-whatsapp"></i> +55 61 99563-6229</p>
+                <p><i class="fa-solid fa-envelope"></i> <a href="mailto:bolladinhosmoking@gmail.com?subject=Contato%20Bolladinho&body=Ol%C3%A1!%20Gostaria%20de%20saber%20mais%20sobre%20as%20piteiras%20Bolladinho.">bolladinhosmoking@gmail.com</a></p>
+            </div>
+            <div class="footer-social">
+                <h4>Siga-nos</h4>
+                <div class="social-icons">
+                    <a href="https://www.instagram.com/soubolladinho" target="_blank" rel="noopener noreferrer"><i
+                            class="fa-brands fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Bolladinho. Todos os direitos reservados. Uma maneira natural de fumar.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        function toggleFaq(id) {
+            const item = document.getElementById(id);
+            const isOpen = item.classList.contains('open');
+            document.querySelectorAll('.faq-item').forEach(el => el.classList.remove('open'));
+            if (!isOpen) item.classList.add('open');
+        }
+
+        // Interceptar envio do formulário para não sair da página (via AJAX)
+        document.addEventListener("DOMContentLoaded", function () {
+            const form = document.querySelector('form[action^="https://formsubmit.co"]');
+            if (form) {
+                form.addEventListener('submit', function (e) {
+                    e.preventDefault();
+                    
+                    const btn = form.querySelector('button[type="submit"]');
+                    const originalText = btn.innerHTML;
+                    
+                    // Estado de carregamento com animação
+                    btn.innerHTML = 'Enviando... <i class="fa-solid fa-spinner fa-spin"></i>';
+                    btn.disabled = true;
+                    btn.style.opacity = '0.8';
+
+                    const formData = new FormData(form);
+                    
+                    // Converter a URL de action normal para a de AJAX do FormSubmit
+                    const actionUrl = form.action.replace('formsubmit.co/', 'formsubmit.co/ajax/');
+                    
+                    fetch(actionUrl, {
+                        method: 'POST',
+                        body: formData,
+                        headers: {
+                            'Accept': 'application/json'
+                        }
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        // Estado de sucesso
+                        btn.innerHTML = 'Mensagem Enviada! <i class="fa-solid fa-check"></i>';
+                        btn.style.backgroundColor = '#25D366'; // Verde
+                        btn.style.borderColor = '#25D366';
+                        btn.style.color = '#fff';
+                        btn.style.opacity = '1';
+                        
+                        form.reset();
+                        
+                        // Retornar o botão ao normal após 3 segundos
+                        setTimeout(() => {
+                            btn.innerHTML = originalText;
+                            btn.disabled = false;
+                            btn.style.backgroundColor = '';
+                            btn.style.borderColor = '';
+                            btn.style.color = '';
+                        }, 3000);
+                    })
+                    .catch(error => {
+                        console.error('Erro ao enviar o formulário:', error);
+                        // Estado de erro
+                        btn.innerHTML = 'Erro ao enviar <i class="fa-solid fa-xmark"></i>';
+                        btn.style.backgroundColor = '#e74c3c'; // Vermelho
+                        btn.style.borderColor = '#e74c3c';
+                        btn.style.color = '#fff';
+                        btn.style.opacity = '1';
+                        
+                        setTimeout(() => {
+                            btn.innerHTML = originalText;
+                            btn.disabled = false;
+                            btn.style.backgroundColor = '';
+                            btn.style.borderColor = '';
+                            btn.style.color = '';
+                        }, 3000);
+                    });
+                });
+            }
+        });
+    </script>
+</body>
+
+</html>
